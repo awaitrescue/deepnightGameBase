@@ -79,6 +79,8 @@ class SamplePlayer extends Entity {
 		// Ceiling collision
 		if( yr<0.2 && level.hasCollision(cx,cy-1) )
 			yr = 0.2;
+
+		// TODO: How do we check for collision with another entity?
 	}
 
 

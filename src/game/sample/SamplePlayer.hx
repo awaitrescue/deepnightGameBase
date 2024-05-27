@@ -81,6 +81,7 @@ class SamplePlayer extends Entity {
 			yr = 0.2;
 
 		// TODO: How do we check for collision with another entity?
+		
 	}
 
 

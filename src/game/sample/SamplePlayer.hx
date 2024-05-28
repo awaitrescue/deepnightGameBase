@@ -9,6 +9,7 @@ package sample;
 **/
 
 class SamplePlayer extends Entity {
+	
 	var ca : ControllerAccess<GameAction>;
 	var walkSpeed = 0.;
 
@@ -40,7 +41,6 @@ class SamplePlayer extends Entity {
 		var b = new h2d.Bitmap( h2d.Tile.fromColor(Green, iwid, ihei), spr );
 		b.tile.setCenterRatio(0.5,1);
 	}
-
 
 	override function dispose() {
 		super.dispose();
@@ -81,6 +81,7 @@ class SamplePlayer extends Entity {
 			yr = 0.2;
 
 		// TODO: How do we check for collision with another entity?
+		// See: https://deepnight.net/tutorial/a-simple-platformer-engine-part-2-collisions/
 
 		
 	}
@@ -88,7 +89,10 @@ class SamplePlayer extends Entity {
 
 	/**
 		Control inputs are checked at the beginning of the frame.
-		VERY IMPORTANT NOTE: because game physics only occur during the `fixedUpdate` (at a constant 30 FPS), no physics increment should ever happen here! What this means is that you can SET a physics value (eg. see the Jump below), but not make any calculation that happens over multiple frames (eg. increment X speed when walking).
+		VERY IMPORTANT NOTE: because game physics only occur during the `fixedUpdate` (at a constant 30 FPS), 
+		no physics increment should ever happen here! 
+		What this means is that you can SET a physics value (eg. see the Jump below), 
+		but not make any calculation that happens over multiple frames (eg. increment X speed when walking).
 	**/
 	override function preUpdate() {
 		super.preUpdate();
@@ -109,7 +113,8 @@ class SamplePlayer extends Entity {
 
 		// Walk
 		if( !isChargingAction() && ca.getAnalogDist2(MoveLeft,MoveRight)>0 ) {
-			// As mentioned above, we don't touch physics values (eg. `dx`) here. We just store some "requested walk speed", which will be applied to actual physics in fixedUpdate.
+			// As mentioned above, we don't touch physics values (eg. `dx`) here. 
+			// We just store some "requested walk speed", which will be applied to actual physics in fixedUpdate.
 			walkSpeed = ca.getAnalogValue2(MoveLeft,MoveRight); // -1 to 1
 		}
 	}

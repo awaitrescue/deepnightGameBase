@@ -1,3 +1,5 @@
+import sample.SamplePlayer;
+
 class Entity {
     public static var ALL : FixedArray<Entity> = new FixedArray(1024);
     public static var GC : FixedArray<Entity> = new FixedArray(ALL.maxSize);
@@ -10,6 +12,7 @@ class Entity {
 	public var destroyed(default,null) = false;
 	public var ftime(get,never) : Float; inline function get_ftime() return game.ftime;
 	public var camera(get,never) : Camera; inline function get_camera() return game.camera;
+	public var player(get, never): SamplePlayer; inline function get_player() return game.player;
 
 	var tmod(get,never) : Float; inline function get_tmod() return Game.ME.tmod;
 	var utmod(get,never) : Float; inline function get_utmod() return Game.ME.utmod;

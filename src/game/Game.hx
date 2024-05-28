@@ -1,3 +1,5 @@
+import sample.SamplePlayer;
+
 class Game extends AppChildProcess {
 	public static var ME : Game;
 
@@ -18,6 +20,8 @@ class Game extends AppChildProcess {
 
 	/** UI **/
 	public var hud : ui.Hud;
+
+	public var player: SamplePlayer;
 
 	/** Slow mo internal values**/
 	var curGameSpeed = 1.0;

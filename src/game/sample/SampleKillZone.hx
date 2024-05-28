@@ -3,6 +3,8 @@ package sample;
 
 class SampleKillZone extends Entity {
 
+    public static var ALL : Array<SampleKillZone> = [];
+
     public function new() {
         super(10, 10);
 
@@ -12,5 +14,15 @@ class SampleKillZone extends Entity {
 
         var bitmap = new h2d.Bitmap(h2d.Tile.fromColor(Red, iwid, ihei), spr);
         bitmap.tile.setCenterRatio(0.5, 1);
+    }
+
+    override function frameUpdate() {
+        // TODO: test for collisions
+        if ( player.isAlive() && attachX >= player.left && attachX <= player.right 
+            && attachY >= player.top && attachY <= player.bottom ) {
+            player.hit(0, this);
+            player.setSquashX(0.2);
+            trace("player hit");
+        }
     }
 }

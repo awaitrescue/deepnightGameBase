@@ -17,12 +17,15 @@ class SampleKillZone extends Entity {
     }
 
     override function frameUpdate() {
-        // TODO: test for collisions
+        // test for collisions
         if ( player.isAlive() && attachX >= player.left && attachX <= player.right 
             && attachY >= player.top && attachY <= player.bottom ) {
             player.hit(0, this);
-            player.setSquashX(0.2);
+            player.setSquashX(0.5);
+            fx.flashBangS(0xffcc00, 0.04, 0.1);
             trace("player hit");
+
+            // TODO: repel the player
         }
     }
 }

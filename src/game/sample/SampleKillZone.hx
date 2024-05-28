@@ -18,7 +18,8 @@ class SampleKillZone extends Entity {
 
     override function frameUpdate() {
         // test for collisions
-        if ( player.isAlive() && attachX >= player.left && attachX <= player.right 
+        if ( player.isAlive() 
+            && attachX >= player.left && attachX <= player.right 
             && attachY >= player.top && attachY <= player.bottom ) {
             player.hit(0, this);
             player.setSquashX(0.5);

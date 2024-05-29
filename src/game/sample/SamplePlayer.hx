@@ -17,6 +17,9 @@ class SamplePlayer extends Entity {
 	var onGround(get,never) : Bool;
 		inline function get_onGround() return !destroyed && vBase.dy==0 && yr==1 && level.hasCollision(cx,cy+1);
 
+	public var hitRadius(get, never): Float;
+		inline function get_hitRadius() return innerRadius/2;
+
 
 	public function new() {
 		super(5,5);
@@ -45,6 +48,16 @@ class SamplePlayer extends Entity {
 	override function dispose() {
 		super.dispose();
 		ca.dispose(); // don't forget to dispose controller accesses
+	}
+
+	override function hit(dmg:Int, from:Null<Entity>) {
+		super.hit(dmg, from);
+
+		// if ( Std.isOfType(from, KillZone) ) {
+
+
+		// 	// TODO: repel the player
+		// }
 	}
 
 

@@ -21,7 +21,6 @@ class KillZone extends Entity {
         if ( player.isAlive() ) {
             if ( distPx(player) <= innerRadius + player.hitRadius ) {
                 player.hit(0, this);
-                // TODO: Should this class or the player be responsible for effects on the player?
             }
         }
     }

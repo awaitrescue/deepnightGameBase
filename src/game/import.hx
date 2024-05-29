@@ -1,5 +1,7 @@
 #if !macro
 
+import Std.isOfType;
+
 // Libs
 import dn.M;
 import dn.Lib;

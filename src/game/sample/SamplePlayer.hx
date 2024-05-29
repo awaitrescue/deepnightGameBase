@@ -53,11 +53,14 @@ class SamplePlayer extends Entity {
 	override function hit(dmg:Int, from:Null<Entity>) {
 		super.hit(dmg, from);
 
-		// if ( Std.isOfType(from, KillZone) ) {
+		if ( Std.isOfType(from, KillZone) ) {
+			var impactDir = from != null ? from.dirTo(this) : -dir;
+			vBump.addXY(impactDir * rnd(0.040, 0.060), -0.05);
 
-
-		// 	// TODO: repel the player
-		// }
+			player.setSquashX(0.5);
+			fx.flashBangS(0xffcc00, 0.04, 0.1);
+			trace("player hit");
+		}
 	}
 
 

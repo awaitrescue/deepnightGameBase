@@ -573,7 +573,7 @@
 					"entityInstances": [
 						{
 							"__identifier": "KillPoint",
-							"__grid": [31,26],
+							"__grid": [26,26],
 							"__pivot": [0.5,1],
 							"__tags": [],
 							"__tile": { "tilesetUid": 23, "x": 240, "y": 208, "w": 16, "h": 16 },
@@ -582,7 +582,7 @@
 							"width": 16,
 							"height": 16,
 							"defUid": 30,
-							"px": [504,432],
+							"px": [424,432],
 							"fieldInstances": []
 						},
 						{

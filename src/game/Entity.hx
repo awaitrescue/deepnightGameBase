@@ -42,6 +42,12 @@ class Entity {
 	/** Sub-grid Y coordinate (from 0.0 to 1.0) **/
     public var yr = 1.0;
 
+	public function coords():{ x:Float, y:Float } {
+        var resultX:Float = this.cx + this.xr;
+        var resultY:Float = this.cy + this.yr;
+        return { x: resultX, y: resultY };
+    }
+
 	var allVelocities : VelocityArray;
 
 	/** Base X/Y velocity of the Entity **/

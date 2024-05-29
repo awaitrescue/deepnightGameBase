@@ -1,9 +1,9 @@
-package sample;
+package en;
 
 
-class SampleKillZone extends Entity {
+class KillZone extends Entity {
 
-    public static var ALL : Array<SampleKillZone> = [];
+    public static var ALL : Array<KillZone> = [];
 
     public function new() {
         super(10, 10);

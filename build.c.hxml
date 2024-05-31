@@ -1,0 +1,4 @@
+_base.hxml
+
+-lib hlsdl
+-hl bin/main.c

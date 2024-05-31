@@ -52,7 +52,8 @@ class Entity {
 
 	/** Base X/Y velocity of the Entity **/
 	public var vBase : Velocity;
-	/** "External bump" velocity. It is used to push the Entity in some direction, independently of the "user-controlled" base velocity. **/
+	/** "External bump" velocity. It is used to push the Entity in some direction, 
+	 * independently of the "user-controlled" base velocity. **/
 	public var vBump : Velocity;
 
 	/** Last known X position of the attach point (in pixels), at the beginning of the latest fixedUpdate **/
@@ -60,7 +61,10 @@ class Entity {
 	/** Last known Y position of the attach point (in pixels), at the beginning of the latest fixedUpdate **/
 	var lastFixedUpdateY = 0.;
 
-	/** If TRUE, the sprite display coordinates will be an interpolation between the last known position and the current one. This is useful if the gameplay happens in the `fixedUpdate()` (so at 30 FPS), but you still want the sprite position to move smoothly at 60 FPS or more. **/
+	/** If TRUE, the sprite display coordinates will be an interpolation 
+	 * between the last known position and the current one. 
+	 * This is useful if the gameplay happens in the `fixedUpdate()` (so at 30 FPS), 
+	 * but you still want the sprite position to move smoothly at 60 FPS or more. **/
 	var interpolateSprPos = true;
 
 	/** Total of all X velocities **/
@@ -185,11 +189,13 @@ class Entity {
 
 	/** Current X position on screen (ie. absolute)**/
 	public var screenAttachX(get,never) : Float;
-		inline function get_screenAttachX() return game!=null && !game.destroyed ? sprX*Const.SCALE + game.scroller.x : sprX*Const.SCALE;
+		inline function get_screenAttachX() 
+			return game!=null && !game.destroyed ? sprX*Const.SCALE + game.scroller.x : sprX*Const.SCALE;
 
 	/** Current Y position on screen (ie. absolute)**/
 	public var screenAttachY(get,never) : Float;
-		inline function get_screenAttachY() return game!=null && !game.destroyed ? sprY*Const.SCALE + game.scroller.y : sprY*Const.SCALE;
+		inline function get_screenAttachY() 
+			return game!=null && !game.destroyed ? sprY*Const.SCALE + game.scroller.y : sprY*Const.SCALE;
 
 	/** attachX value during last frame **/
 	public var prevFrameAttachX(default,null) : Float = -Const.INFINITE;
@@ -396,9 +402,11 @@ class Entity {
 	public function is<T:Entity>(c:Class<T>) return Std.isOfType(this, c);
 	public function as<T:Entity>(c:Class<T>) : T return Std.downcast(this, c);
 
-	/** Return a random Float value in range [min,max]. If `sign` is TRUE, returned value might be multiplied by -1 randomly. **/
+	/** Return a random Float value in range [min,max]. 
+	 * If `sign` is TRUE, returned value might be multiplied by -1 randomly. **/
 	public inline function rnd(min,max,?sign) return Lib.rnd(min,max,sign);
-	/** Return a random Integer value in range [min,max]. If `sign` is TRUE, returned value might be multiplied by -1 randomly. **/
+	/** Return a random Integer value in range [min,max]. 
+	 * If `sign` is TRUE, returned value might be multiplied by -1 randomly. **/
 	public inline function irnd(min,max,?sign) return Lib.irnd(min,max,sign);
 
 	/** Truncate a float value using given `precision` **/
@@ -440,7 +448,8 @@ class Entity {
 	public inline function createPoint() return LPoint.fromCase(cx+xr,cy+yr);
 
 	/** Create a LRect instance from current entity bounds **/
-	public inline function createRect() return tools.LRect.fromPixels( Std.int(left), Std.int(top), Std.int(wid), Std.int(hei) );
+	public inline function createRect() return tools.LRect.fromPixels( Std.int(left), 
+		Std.int(top), Std.int(wid), Std.int(hei) );
 
     public final function destroy() {
         if( !destroyed ) {
@@ -797,7 +806,8 @@ class Entity {
 		updateLastFixedUpdatePos();
 
 		/*
-			Stepping: any movement greater than 33% of grid size (ie. 0.33) will increase the number of `steps` here. These steps will break down the full movement into smaller iterations to avoid jumping over grid collisions.
+			Stepping: any movement greater than 33% of grid size (ie. 0.33) will increase the number of `steps` here. 
+			These steps will break down the full movement into smaller iterations to avoid jumping over grid collisions.
 		*/
 		var steps = M.ceil( ( M.fabs(dxTotal) + M.fabs(dyTotal) ) / 0.33 );
 		if( steps>0 ) {

@@ -16,7 +16,8 @@ class KillZone extends Entity {
         bitmap.tile.setCenterRatio(0.5, 1);
     }
 
-    override function frameUpdate() {
+    override function fixedUpdate() {
+        super.fixedUpdate();
         // test for collisions
         if ( player.isAlive() ) {
             if ( distPx(player) <= innerRadius + player.hitRadius ) {

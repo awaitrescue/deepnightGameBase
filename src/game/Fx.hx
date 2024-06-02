@@ -136,11 +136,11 @@ class Fx extends GameChildProcess {
 		#end
 	}
 
-	inline function collides(p:HParticle, offX=0., offY=0.) {
-		return level.hasCollision( Std.int((p.x+offX)/Const.GRID), Std.int((p.y+offY)/Const.GRID) );
+	inline function collides(p: HParticle, offX = 0., offY = 0.) {
+		return level.hasCollision(Std.int((p.x + offX) / Const.GRID), Std.int((p.y + offY) / Const.GRID));
 	}
 
-	public inline function flashBangS(c:Col, a:Float, t=0.1) {
+	public inline function flashBangS(c: Col, a: Float, t=0.1) {
 		var e = new h2d.Bitmap(h2d.Tile.fromColor(c,1,1,a));
 		game.root.add(e, Const.DP_FX_FRONT);
 		e.scaleX = game.stageWid;
@@ -157,15 +157,15 @@ class Fx extends GameChildProcess {
 
 		USAGE: fx.dotsExplosionExample(50,50, 0xffcc00)
 	**/
-	public inline function dotsExplosionExample(x:Float, y:Float, color:Col) {
-		for(i in 0...80) {
+	public inline function dotsExplosionExample(x: Float, y: Float, color: Col) {
+		for(i in 0...500) {
 			var p = allocMain_add( D.tiles.fxDot, x+rnd(0,3,true), y+rnd(0,3,true) );
-			p.alpha = rnd(0.4,1);
+			p.alpha = rnd(0.4, 1);
 			p.colorAnimS(color, 0x762087, rnd(0.6, 3)); // fade particle color from given color to some purple
-			p.moveAwayFrom(x,y, rnd(1,3)); // move away from source
+			p.moveAwayFrom(x, y, rnd(1,9)); // move away from source
 			p.frict = rnd(0.8, 0.9); // friction applied to velocities
-			p.gy = rnd(0, 0.02); // gravity Y (added on each frame)
-			p.lifeS = rnd(2,3); // life time in seconds
+			p.gy = rnd(0, 0.2); // gravity Y (added on each frame)
+			p.lifeS = rnd(2, 3); // life time in seconds
 		}
 	}
 

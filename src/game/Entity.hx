@@ -221,20 +221,17 @@ class Entity {
 			enableDebugBounds();
     }
 
-
 	public function registerNewVelocity(frict:Float) : Velocity {
 		var v = Velocity.createFrict(frict);
 		allVelocities.push(v);
 		return v;
 	}
 
-
 	/** Remove sprite from display context. Only do that if you're 100% sure your entity won't need the `spr` instance itself. **/
 	function noSprite() {
 		spr.setEmptyTexture();
 		spr.remove();
 	}
-
 
 	function set_pivotX(v) {
 		pivotX = M.fclamp(v,0,1);
@@ -469,6 +466,7 @@ class Entity {
 		ucd = null;
     }
 
+	// ------------------- Debug --------------------
 
 	/** Print some numeric value below entity **/
 	public inline function debugFloat(v:Float, c:Col=0xffffff) {
@@ -530,6 +528,8 @@ class Entity {
 		debugBounds.lineStyle(1, c, 0.3);
 		debugBounds.drawCircle(centerX-attachX, centerY-attachY, 3);
 	}
+
+	// --------------------- Actions --------------------
 
 	/** Wait for `sec` seconds, then runs provided callback. **/
 	function chargeAction(id:ChargedActionId, sec:Float, onComplete:ChargedAction->Void, ?onProgress:ChargedAction->Void) {
@@ -593,6 +593,7 @@ class Entity {
 		}
 	}
 
+	// --------------------- FX --------------------
 
 	public inline function hasAffect(k:Affect) {
 		return isAlive() && affects.exists(k) && affects.get(k)>0;
@@ -677,6 +678,7 @@ class Entity {
 		sprSquashY = scaleY;
 	}
 
+	// --------------------- Update loop -----------------
 
 	/**
 		"Beginning of the frame" loop, called before any other Entity update loop

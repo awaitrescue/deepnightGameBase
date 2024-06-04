@@ -7,6 +7,7 @@ class KillZone extends Entity {
 
     public function new() {
         super(10, 10);
+        ALL.push(this);
 
         var start = level.data.l_Entities.all_KillPoint[0];
         if (start != null)
@@ -19,8 +20,8 @@ class KillZone extends Entity {
     override function fixedUpdate() {
         super.fixedUpdate();
         // test for collisions
-        if ( player.isAlive() ) {
-            if ( distPx(player) <= innerRadius + player.hitRadius ) {
+        if (player.isAlive()) {
+            if (distPx(player) <= innerRadius + player.hitRadius) {
                 player.hit(0, this);
             }
         }

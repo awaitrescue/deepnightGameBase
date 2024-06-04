@@ -20,7 +20,6 @@ class SamplePlayer extends Entity {
 	public var hitRadius(get, never): Float;
 		inline function get_hitRadius() return innerRadius/2;
 
-
 	public function new() {
 		super(5,5);
 
@@ -53,17 +52,19 @@ class SamplePlayer extends Entity {
 	override function hit(dmg:Int, from:Null<Entity>) {
 		super.hit(dmg, from);
 
-		if ( isOfType(from, KillZone) ) {
+		if (isOfType(from, KillZone)) {
 			var impactDir = from != null ? from.dirTo(this) : -dir;
 			vBump.addXY(impactDir * rnd(0.040, 0.060), -0.05);
 
 			player.setSquashX(0.5);
 			fx.flashBangS(0xffcc00, 0.04, 0.1);
 			camera.shakeS(0.05, 0.5);
+			// Zero all velocities
+			vBase.dx = 0;
+			vBase.dy = 0;
 			trace("player hit");
 		}
 	}
-
 
 	/** X collisions **/
 	override function onPreStepX() {
@@ -77,7 +78,6 @@ class SamplePlayer extends Entity {
 		if( xr<0.2 && level.hasCollision(cx-1,cy) )
 			xr = 0.2;
 	}
-
 
 	/** Y collisions **/
 	override function onPreStepY() {
@@ -98,7 +98,6 @@ class SamplePlayer extends Entity {
 			yr = 0.2;		
 	}
 
-
 	/**
 		Control inputs are checked at the beginning of the frame.
 		VERY IMPORTANT NOTE: because game physics only occur during the `fixedUpdate` (at a constant 30 FPS), 
@@ -112,7 +111,6 @@ class SamplePlayer extends Entity {
 		walkSpeed = 0;
 		if( onGround )
 			cd.setS("recentlyOnGround",0.1); // allows "just-in-time" jumps
-
 
 		// Jump
 		if( cd.has("recentlyOnGround") && ca.isPressed(Jump) ) {
@@ -130,7 +128,6 @@ class SamplePlayer extends Entity {
 			walkSpeed = ca.getAnalogValue2(MoveLeft,MoveRight); // -1 to 1
 		}
 	}
-
 
 	override function fixedUpdate() {
 		super.fixedUpdate();

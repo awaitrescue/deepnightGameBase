@@ -54,11 +54,11 @@ class SamplePlayer extends Entity {
 
 		if (isOfType(from, KillZone)) {
 			var impactDir = from != null ? from.dirTo(this) : -dir;
-			vBump.addXY(impactDir * rnd(0.040, 0.060), -0.05);
-
+			
+			vBump.addXY(impactDir * rnd(0.10, 0.20), -0.05);
 			player.setSquashX(0.5);
 			fx.flashBangS(0xffcc00, 0.04, 0.1);
-			camera.shakeS(0.05, 0.5);
+			camera.shakeS(0.3, 0.8);
 			// Zero all velocities
 			vBase.dx = 0;
 			vBase.dy = 0;

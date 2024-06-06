@@ -27,7 +27,7 @@ jobs:
       - run: haxe -version
 
       # Install libs
-      - run: haxe setup.hxml
+      - run: haxe build/setup.hxml
       - run: haxelib list
 
       # Try to build

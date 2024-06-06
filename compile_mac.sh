@@ -12,7 +12,7 @@ print_progress() {
 }
 
 print_progress "🔧 Compiling Haxe sources..."
-haxe build.c.hxml
+haxe build/build.c.hxml
 
 print_progress "🔧 Compiling C sources..."
 gcc -O3 -o ${EXECUTABLE_NAME} -std=c11 -I bin bin/main.c -lhl -L /usr/local/lib /usr/local/lib/*.hdll -L /opt/homebrew/opt/libuv/lib -luv

@@ -12,7 +12,6 @@ class SampleGame extends Game {
 		super.startLevel(l);
 		player = new SamplePlayer();
 		new KillZone();
-
 	}
 }
 

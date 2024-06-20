@@ -1,12 +1,11 @@
 #!/bin/bash
 
 # Variables
-APP_NAME="GameBase.app"
-EXECUTABLE_NAME="gamebase"
+APP_NAME="Fodder.app"
+EXECUTABLE_NAME="Fodder"
 LIB_PATH="/usr/local/lib"
 DEVELOPER_ID="Developer ID Application: Your Name (Team ID)"  # Replace with your actual developer ID
 
-# Function to print progress
 print_progress() {
     echo -ne "$1\r"
 }
@@ -14,11 +13,13 @@ print_progress() {
 print_progress "🔧 Compiling Haxe sources..."
 haxe build/build.c.hxml
 
+# TODO: We could use a redist folder (such as in cats are assholes) to reduce system level dependencies
+
 print_progress "🔧 Compiling C sources..."
 gcc -O3 -o ${EXECUTABLE_NAME} -std=c11 -I bin bin/main.c -lhl -L /usr/local/lib /usr/local/lib/*.hdll -L /opt/homebrew/opt/libuv/lib -luv
 
 # Create necessary directories
-print_progress "📂 Creating application bundle directories..."
+print_progress "🗂️ Creating application bundle directories..."
 rm -rf "${APP_NAME}"
 mkdir "${APP_NAME}"
 mkdir -p "${APP_NAME}/Contents/MacOS"
@@ -43,7 +44,7 @@ cp "${LIB_PATH}/openal.hdll" "${APP_NAME}/Contents/Frameworks/"
 cp "/opt/homebrew/opt/libuv/lib/libuv.1.dylib" "${APP_NAME}/Contents/Frameworks/"
 
 # Create Info.plist
-print_progress "📝 Creating Info.plist..."
+print_progress "📄 Creating Info.plist..."
 cat > "${APP_NAME}/Contents/Info.plist" <<EOL
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -54,7 +55,7 @@ cat > "${APP_NAME}/Contents/Info.plist" <<EOL
     <key>CFBundleIdentifier</key>
     <string>com.yourcompany.helloworld</string>
     <key>CFBundleName</key>
-    <string>HelloWorld</string>
+    <string>${EXECUTABLE_NAME}</string>
     <key>CFBundleVersion</key>
     <string>1.0</string>
     <key>CFBundlePackageType</key>
@@ -70,7 +71,7 @@ cat > "${APP_NAME}/Contents/Info.plist" <<EOL
 EOL
 
 # Create PkgInfo
-print_progress "📝 Creating PkgInfo..."
+print_progress "📄 Creating PkgInfo..."
 echo -n 'APPL????' > "${APP_NAME}/Contents/PkgInfo"
 
 # Adjust rpath
@@ -95,7 +96,7 @@ print_progress "🔏 Signing the app bundle..."
 codesign --deep --force --verify --verbose --sign "${DEVELOPER_ID}" "${APP_NAME}"
 
 # Move the app bundle to bin directory
-print_progress "📂 Moving app bundle to bin directory..."
+print_progress "🗂️ Moving app bundle to bin directory..."
 rm -rf bin/"${APP_NAME}"
 mv "${APP_NAME}" bin/"${APP_NAME}"
 
